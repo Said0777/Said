@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин Игр</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .game-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .game-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .game-title {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        .price {
+            color: green;
+            font-size: 1.2em;
+        }
+        .cart {
+            margin-top: 20px;
+        }
+        .item {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Магазин Игр</h1>
+<div id="games">
+    <div class="game-card" onclick="addToCart('Игра 1', 1500)">
+        <h2 class="game-title">Игра 1</h2>
+        <p class="price">Цена: 1500₽</p>
+    </div>
+    <div class="game-card" onclick="addToCart('Игра 2', 2000)">
+        <h2 class="game-title">Игра 2</h2>
+        <p class="price">Цена: 2000₽</p>
+    </div>
+    <div class="game-card" onclick="addToCart('Игра 3', 2500)">
+        <h2 class="game-title">Игра 3</h2>
+        <p class="price">Цена: 2500₽</p>
+    </div>
+</div>
+
+<div class="cart">
+    <h2>Корзина</h2>
+    <div id="cartItems"></div>
+    <p id="totalPrice">Итого: 0₽</p>
+</div>
+
+<script>
+    let cart = [];
+    let total = 0;
+
+    function addToCart(item, price) {
+        cart.push({ item, price });
+        total += price;
+        updateCart();
+    }
+
+    function updateCart() {
+        const cartItems = document.getElementById('cartItems');
+        cartItems.innerHTML = '';
+        
+        cart.forEach((product) => {
+            const div = document.createElement('div');
+            div.className = 'item';
+            div.innerText = `${product.item} - ${product.price}₽`;
+            cartItems.appendChild(div);
+        });
+
+        document.getElementById('totalPrice').innerText = `Итого: ${total}₽`;
+    }
+</script>
+
+</body>
+</html>
